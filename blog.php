@@ -12,8 +12,7 @@ require('db-connect.php');
 					FROM posts, users
 					WHERE posts.is_published = 1
 					AND posts.user_id = users.user_id
-					ORDER BY posts.date DESC
-					LIMIT 1";
+					ORDER BY posts.date DESC";
 		//run the query
 		$result = $db->query($query); 
 
@@ -42,7 +41,6 @@ require('db-connect.php');
 			} //end while loop		
 		?>
 
-		<a href="blog.php">Continue reading my blog...</a>
 
 		<?php		
 		}else{
