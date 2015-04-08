@@ -8,7 +8,8 @@ require('db-connect.php');
 		<?php 
 		//set up query to get the newest published post - title & body only. 
 		// newest first
-		$query = "SELECT posts.title, posts.body, posts.date, users.username
+		$query = "SELECT posts.title, posts.body, posts.date, users.username, 
+					posts.post_id
 					FROM posts, users
 					WHERE posts.is_published = 1
 					AND posts.user_id = users.user_id
@@ -33,6 +34,8 @@ require('db-connect.php');
 			<time datetime="<?php echo $row['date']; ?>">
 				<?php echo convert_date($row['date']); ?>
 			</time>
+
+				<?php count_comments( $row['post_id'], true ); ?>
 
 			</div>
 

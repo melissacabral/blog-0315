@@ -21,7 +21,9 @@
 <li>
 <a href="<?php echo SITE_URL . 'single.php?post_id=' . $row['post_id']; ?>">
 				<?php echo $row['title']; ?>
-			</a></li>
+			</a>
+			<?php count_comments($row['post_id']); ?>
+		</li>
 
 			<?php }//end while 
 			$result->free(); ?>
@@ -49,7 +51,10 @@
 
 			<li>
 <a href="<?php echo SITE_URL . 'category.php?cat_id=' . $row['category_id'] ?>">
-	<?php echo $row['name'] ?></a></li>
+	<?php echo $row['name'] ?></a>
+
+			<?php count_posts_in_category($row['category_id']); ?>
+			</li>
 
 			<?php }//end while
 			$result->free(); ?>
@@ -59,12 +64,28 @@
 
 
 
-<?php //get the titles and URLs of up to 10 links  ?>
+<?php 
+//get the titles and URLs of up to 10 links  
+$query	 = "SELECT title, url 
+			FROM links 
+			LIMIT 10";
+$result = $db->query($query);
+if( $result->num_rows >= 1 ){ ?>
 
 	<section>
 		<h2>Links</h2>
 		<ul>
-			<li><a href="URL">TITLE</a></li>
+			<?php while( $row = $result->fetch_assoc() ) { ?>
+			<li>
+				<a href="<?php echo $row['url']; ?>">
+					<?php echo $row['title'] ?>
+				</a>
+			</li>
+			<?php } //end while
+			$result->free(); ?>
 		</ul>
 	</section>
+
+<?php } //end if links ?>
+
 </aside>
