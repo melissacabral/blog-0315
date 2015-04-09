@@ -1,19 +1,23 @@
 <?php 
 //connect to the database (contains DB info and constants)
 require('db-connect.php'); 
+
+//figure out which post the user clicked on.
+//URL looks like /single.php?post_id=X
+$post_id = $_GET['post_id'];
 ?>
 <?php include( INCLUDES_PATH . 'header.php' ); ?>
 
 	<main>
 		<?php 
-		//set up query to get the newest published post - title & body only. 
-		// newest first
+		//set up query to get the post the user is viewing 
+	
 		$query = "SELECT posts.title, posts.body, posts.date, users.username, 
 					posts.post_id
 					FROM posts, users
 					WHERE posts.is_published = 1
 					AND posts.user_id = users.user_id
-					ORDER BY posts.date DESC
+					AND posts.post_id = $post_id
 					LIMIT 1";
 		//run the query
 		$result = $db->query($query); 
