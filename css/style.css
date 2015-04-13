@@ -69,12 +69,36 @@ li{
 	bottom:-.41em;
 	right:.26em;
 }
-.button{
+/*forms*/
+label{
+	display: block;
+}
+form{
+	font-size: 1.2em;
+}
+input,textarea{
+	width:90%;
+	margin:.2em 0;
+	display: inline-block;
+	padding:.5em;
+	font-family: monospace;
+	border:solid 1px #6D83CC;
+}
+textarea{
+	resize:vertical;
+	min-height: 10em;
+}
+.button, input[type=submit]{
 	background-color: #D30059;
 	border-radius: .25em;
-	padding:.1em .5em;
-	display: inline-block;
+	border:none;
+	padding:.2em .5em;
+	display:block;
 	color:white;
+}
+input[type=submit]{
+	max-width:18em;
+	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
 }
 .button:hover{
 	background-color: #07ADAF;

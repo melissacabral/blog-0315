@@ -6,14 +6,17 @@ require('db-connect.php');
 //URL looks like /single.php?post_id=X
 $post_id = $_GET['post_id'];
 ?>
-<?php include( INCLUDES_PATH . 'header.php' ); ?>
+<?php 
+include( INCLUDES_PATH . 'header.php' );
+
+include( INCLUDES_PATH . 'parse-comment.php'); ?>
 
 	<main>
 		<?php 
 		//set up query to get the post the user is viewing 
 	
 		$query = "SELECT posts.title, posts.body, posts.date, users.username, 
-					posts.post_id
+					posts.post_id, posts.allow_comments
 					FROM posts, users
 					WHERE posts.is_published = 1
 					AND posts.user_id = users.user_id
@@ -44,19 +47,25 @@ $post_id = $_GET['post_id'];
 			</div>
 
 		</article>
+
+		<?php //only show the form if comments are allowed on this post
+		if( $row['allow_comments'] ){ 
+			include(INCLUDES_PATH . 'comment-form.php');
+		}  //end if allow comments
+		?>
 		
 		<?php 
-			} //end while loop		
-		?>
+			} //end while loop
 
-		<a href="blog.php" class="button">Continue reading my blog...</a>
+		//we are done with the results, so free the memory/resources on the server
+		$result->free();		
+		?>
 
 		<?php		
 		}else{
 			echo 'Sorry, no posts found';
 		} 
-		//we are done with the results, so free the memory/resources on the server
-		$result->free();
+		
 		?>
 
 	</main>
