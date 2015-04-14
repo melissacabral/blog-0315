@@ -95,6 +95,7 @@ textarea{
 	padding:.2em .5em;
 	display:block;
 	color:white;
+	width:auto;
 }
 input[type=submit]{
 	max-width:18em;

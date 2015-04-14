@@ -1,5 +1,11 @@
 <aside class="sidebar">
 
+	<form method="get" action="<?php echo SITE_URL ?>search.php">
+		<label for="the_phrase" class="screen-reader-text">Search:</label>
+		<input type="search" name="phrase" id="the_phrase" >
+		<input type="submit" value="Search">
+	</form>
+
 	<?php 
 	//get the title and post_id of the latest 10 published posts
 	$query = 	"SELECT title, post_id
