@@ -87,4 +87,55 @@ function convTimestamp($date){
 	return $stamp;
 }
 
+/**
+ * Clean strings to prepare them for the DB
+ * @param string $input - dirty data submitted by the user
+ * @return string - clean data, ready for DB
+ */
+function clean_input( $input ){
+	global $db;
+	return mysqli_real_escape_string($db, strip_tags( $input ));
+}
+
+
+
+/**
+ * Displays one item in an array of errors. 
+ * Use next to a form input.
+ * @param  	array 	$error A list of inline errors
+ * @return  string 	HTML formatted inline error
+ * @author  melissa <mcabral@platt.edu>
+ * @since  	0.1
+ */
+function mmc_show_inline_error( $error ){
+	//if error exists, show it
+	if( $error ){
+		$output = '<span class="inline-error">';
+		$output .= $error;
+		$ouptut .= '</span>';
+
+		echo $output;
+	}else{
+		return;  //return nothing. no error to show. 
+	}
+}
+/**
+ * Display an array as an unordered list
+ * @param   array 	$array list to display
+ * @return  string 	HTML formatted list
+ */
+function mmc_show_array( $array ){
+	if( !empty( $array ) ){
+		$output = '<ul>';
+		foreach( $array as $item ){
+			$output .= '<li>' . $item . '</li>';
+		}
+		$output .= '</ul>';
+
+		echo $output;
+	}else{
+		return;
+	}
+}
+
 //no close PHP
