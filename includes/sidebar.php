@@ -12,7 +12,7 @@
 				FROM posts
 				WHERE is_published = 1
 				ORDER BY date DESC
-				LIMIT 10"; 
+				LIMIT 5"; 
 	//run it
 	$result = $db->query($query);
 	//check to see if there are posts in the result

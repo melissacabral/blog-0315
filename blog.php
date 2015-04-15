@@ -22,7 +22,7 @@ require('db-connect.php');
 			while($row = $result->fetch_assoc()){
 		?>
 		<article>
-			<h2><?php echo $row['title']; ?></h2>
+			<h2><a href="single.php?post_id=<?php echo $row['post_id'] ?>"><?php echo $row['title']; ?></a></h2>
 			<p><?php echo $row['body'] ?></p>
 			<div class="post-info">
 				Posted by
