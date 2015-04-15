@@ -72,6 +72,12 @@ if( $_POST['did_register'] ){
 			//success. log them in and redirect to admin panel
 			$_SESSION['loggedin'] = true;
 			setcookie( 'loggedin', true, time() + 60 * 60 * 24 * 7 );
+
+			//WHO is logged in?
+			$user_id = $db->insert_id;
+			$_SESSION['user_id'] = $user_id;
+			setcookie('user_id', $user_id,time() + 60 * 60 * 24 * 7 );
+			
 			//redirect
 			header('Location:admin.php');
 		}else{
@@ -87,7 +93,8 @@ if( $_POST['did_register'] ){
 	<title>Sign up for an account</title>
 	<link rel="stylesheet" type="text/css" href="../css/admin-style.css">
 </head>
-<body>
+<body class="register">
+	<main>
 	<h1>Create an account</h1>
 
 	<?php mmc_show_array($errors); ?>
@@ -109,5 +116,6 @@ if( $_POST['did_register'] ){
 		<input type="submit" value="Sign Up!">
 		<input type="hidden" name="did_register" value="1">
 	</form>
+</main>
 </body>
 </html>
