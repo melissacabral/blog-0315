@@ -138,4 +138,61 @@ function mmc_show_array( $array ){
 	}
 }
 
+/**
+ * Count the number of posts that any user has
+ * @param int $user_id The ID of the user to count posts for
+ * @param bool $is_published - get public or private posts. 
+ *                           1 = public (default)
+ *                           0 = private
+ */
+function mmc_count_posts( $user_id, $is_published = 1 ){
+	global $db;
+	$query 	 = "SELECT COUNT(*) AS total
+				FROM posts
+				WHERE user_id = $user_id
+				AND is_published = $is_published";
+	$result = $db->query($query);
+	//counts only return one row. no loop needed
+	$row = $result->fetch_assoc();
+	echo $row['total'];
+}
+
+/**
+ * Count all approved comments on any user's posts
+ * @param int $user_id - the person who wrote the posts
+ */
+function mmc_count_comments($user_id){
+	global $db;
+	$query = "SELECT COUNT(*) AS total
+				FROM posts, comments
+				WHERE posts.post_id = comments.post_id
+				AND posts.user_id = $user_id
+				AND comments.is_approved = 1";
+	$result = $db->query($query);
+	$row = $result->fetch_assoc();
+	echo $row['total'];
+}
+
+/**
+ * Get the most popular post written by a user based on number of comments
+ */
+function mmc_most_popular_post( $user_id ){
+	global $db;
+	$query = "SELECT COUNT(*) AS total, posts.title
+				FROM comments, posts
+				WHERE posts.post_id = comments.post_id
+				AND posts.user_id = $user_id
+				GROUP BY posts.post_id
+				ORDER BY total DESC
+				LIMIT 1";
+	$result = $db->query($query);
+	if($result->num_rows == 1){
+		$row = $result->fetch_assoc();
+		echo $row['title'] . ' (' . $row['total'] . ')';
+	}else{
+		echo 'Your posts do not have any comments yet.';
+	}
+}
+
+
 //no close PHP

@@ -1,41 +1,31 @@
-<?php //security check!
-session_start();
-if($_SESSION['loggedin'] != true){
-	//redirect to login
-	header('Location:login.php');
-
-	//stop this file from loading
-	die('You do not have permission to access this page. ');
-} ?>
-<!doctype html>
-<html>
-<head>
-	<title>Admin Panel</title>
-	<link rel="stylesheet" type="text/css" href="../css/admin-style.css">
-</head>
-<body>
-	<header>
-		<h1>Blog Admin Panel</h1>
-		<nav>
-			<ul>
-				<li><a href="#">Dashboard</a></li>
-				<li><a href="#">Write Post</a></li>
-				<li><a href="#">Manage Posts</a></li>
-				<li><a href="#">Manage Comments</a></li>
-				<li><a href="#">Edit Profile</a></li>
-			</ul>
-		</nav>
-		<ul class="utilities">
-			<li><a href="login.php?action=logout" class="warn">Log Out!</a></li>
-		</ul>
-	</header>
+<?php 
+require('../db-connect.php');
+//header has the security check!
+$page = 'dashboard';
+include('admin-header.php');
+ ?>
 
 	<main>
-		put content here!
+		<section>
+			<h2>Stats</h2>
+
+			<ul>
+				<li>You have <?php mmc_count_posts($_SESSION['user_id']); ?> published posts</li>
+				<li>You have <?php mmc_count_posts($_SESSION['user_id'], 0); ?> Post Drafts</li>
+				<li>Your posts have <?php mmc_count_comments($_SESSION['user_id']) ?> comments</li>
+			</ul>
+
+		</section>
+
+		<section>
+			<h2>Most Popular Content</h2>
+			<ul>
+				<li>Post with the most comments: 
+					<?php mmc_most_popular_post($_SESSION['user_id']) ?>
+				</li>
+				<li>Most commonly used category: NAME</li>
+			</ul>
+		</section>
 	</main>
 
-	<footer>
-		&copy; 2014 Your Name Here!
-	</footer>
-</body>
-</html>
+<?php include('admin-footer.php'); ?>
