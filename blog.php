@@ -33,6 +33,8 @@ require('db-connect.php');
 			</time>
 				<?php count_comments( $row['post_id'], true ); ?>
 
+				<?php mmc_post_categories( $row['post_id'] ); ?>
+
 			</div>
 
 		</article>

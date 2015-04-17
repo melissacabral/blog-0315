@@ -194,5 +194,24 @@ function mmc_most_popular_post( $user_id ){
 	}
 }
 
+/**
+ * Display a comma separated list of all the categories that a post is in
+ */
+function mmc_post_categories( $post_id ){
+	global $db;
+	//set up query
+	$query = "SELECT categories.*
+				FROM posts_categories AS pc, categories
+				WHERE pc.category_id = categories.category_id
+				AND pc.post_id = $post_id";
+	$result = $db->query($query);
+	if($result->num_rows >= 1){
+		while( $row = $result->fetch_assoc() ){
+			echo $row['name'];
+			echo ', ';
+		}
+	}
+}
+
 
 //no close PHP
