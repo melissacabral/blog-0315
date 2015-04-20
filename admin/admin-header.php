@@ -23,7 +23,7 @@ include_once(INCLUDES_PATH . 'functions.php');
 			<ul>
 				<li class="dashboard"><a href="<?php echo SITE_URL ?>admin/admin.php">Dashboard</a></li>
 				<li class="write"><a href="<?php echo SITE_URL ?>admin/write-post.php">Write Post</a></li>
-				<li class="manage"><a href="#">Manage Posts</a></li>
+				<li class="manage"><a href="<?php echo SITE_URL ?>admin/manage-posts.php">Manage Posts</a></li>
 				<li class="comments"><a href="#">Manage Comments</a></li>
 				<li class="profile"><a href="#">Edit Profile</a></li>
 			</ul>
