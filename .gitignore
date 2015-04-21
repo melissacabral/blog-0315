@@ -1,4 +1,7 @@
 db-connect.php
+load_second.php
+load_first.php
+lazy_load_example.php
 
 # Windows image file caches
 Thumbs.db
