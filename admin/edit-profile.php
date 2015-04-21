@@ -13,7 +13,6 @@ if( $_POST['did_upload'] ){
 	$sizes = array(
 		'thumb_img' => 150,
 		'medium_img' => 300,
-		'large_img' => 1200
 	);		
 		
 	// This is the temporary file created by PHP
