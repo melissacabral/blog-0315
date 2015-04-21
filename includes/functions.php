@@ -213,5 +213,29 @@ function mmc_post_categories( $post_id ){
 	}
 }
 
+/**
+ * Display any user's userpic at any size
+ */
+function show_userpic( $user_id, $size, $is_path = false ){
+	global $db;
+	//get the userpic randomsha
+	$query = "SELECT userpic
+			FROM users
+			WHERE user_id = $user_id
+			LIMIT 1";
+	$result = $db->query($query);
+	if($result->num_rows == 1){
+		$row = $result->fetch_assoc();
+		if($is_path){
+			return SITE_PATH . 'uploads/' . $row['userpic'] . '_' . $size . '.jpg';
+
+		}else{
+			echo '<img src="' . SITE_URL . 'uploads/' . $row['userpic'] . '_' . $size . '.jpg">';
+		}
+	}
+
+}
+
+
 
 //no close PHP

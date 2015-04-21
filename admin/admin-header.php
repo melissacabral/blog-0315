@@ -1,5 +1,4 @@
 <?php //security check!
-session_start();
 if($_SESSION['loggedin'] != true){
 	//redirect to login
 	header('Location:login.php');
@@ -8,7 +7,7 @@ if($_SESSION['loggedin'] != true){
 	die('You do not have permission to access this page. ');
 } 
 
-include_once(INCLUDES_PATH . 'functions.php'); 
+
 ?>
 <!doctype html>
 <html>
@@ -25,7 +24,7 @@ include_once(INCLUDES_PATH . 'functions.php');
 				<li class="write"><a href="<?php echo SITE_URL ?>admin/write-post.php">Write Post</a></li>
 				<li class="manage"><a href="<?php echo SITE_URL ?>admin/manage-posts.php">Manage Posts</a></li>
 				<li class="comments"><a href="#">Manage Comments</a></li>
-				<li class="profile"><a href="#">Edit Profile</a></li>
+				<li class="profile"><a href="<?php echo SITE_URL ?>admin/edit-profile.php">Edit Profile</a></li>
 			</ul>
 		</nav>
 		<ul class="utilities">
