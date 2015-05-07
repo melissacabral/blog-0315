@@ -97,11 +97,11 @@ if( $_POST['did_upload'] ){
 				LIMIT 1";
 		$result = $db->query($query);
 
-		if($db->affected_rows == 1){
-			$statusmsg .= 'DB query worked';
-		}else{
-			$statusmsg .= 'DB query failed';
-		}
+		//if($db->affected_rows == 1){
+			//$statusmsg .= 'DB query worked';
+		//}else{
+			//$statusmsg .= 'DB query failed';
+		//}
 
 		$statusmsg .=  "The file ".  basename( $_FILES['uploadedfile']['name']). 
 		" has been uploaded <br />";

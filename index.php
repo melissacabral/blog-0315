@@ -5,55 +5,55 @@ require('db-connect.php');
 <?php include( INCLUDES_PATH . 'header.php' ); ?>
 
 	<main>
-		<?php 
-		//set up query to get the newest published post - title & body only. 
-		// newest first
-		$query = "SELECT posts.title, posts.body, posts.date, users.username, 
-					posts.post_id
-					FROM posts, users
-					WHERE posts.is_published = 1
-					AND posts.user_id = users.user_id
-					ORDER BY posts.date DESC
-					LIMIT 1";
-		//run the query
-		$result = $db->query($query); 
+<?php 
+//set up query to get the newest published post - title & body only. 
+// newest first
+$query = "SELECT posts.title, posts.body, posts.date, users.username, 
+			posts.post_id
+			FROM posts, users
+			WHERE posts.is_published = 1
+			AND posts.user_id = users.user_id
+			ORDER BY posts.date DESC
+			LIMIT 1";
+//run the query
+$result = $db->query($query); 
 
-		//check to make sure that the result contains data
-		if( $result->num_rows >= 1  ){
-			//loop through each row in the results
-			while($row = $result->fetch_assoc()){
-		?>
-		<article>
-			<h2><a href="single.php?post_id=<?php echo $row['post_id'] ?>"><?php echo $row['title']; ?></a></h2>
-			<p><?php echo $row['body'] ?></p>
+//check to make sure that the result contains data
+if( $result->num_rows >= 1  ){
+	//loop through each row in the results
+	while($row = $result->fetch_assoc()){
+?>
+<article>
+	<h2><a href="single.php?post_id=<?php echo $row['post_id'] ?>"><?php echo $row['title']; ?></a></h2>
+	<p><?php echo $row['body'] ?></p>
 
-			<div class="post-info">
-				Posted by
-				<?php echo $row['username'] ?>
-				on
-			<time datetime="<?php echo $row['date']; ?>">
-				<?php echo convert_date($row['date']); ?>
-			</time>
+	<div class="post-info">
+		Posted by
+		<?php echo $row['username'] ?>
+		on
+	<time datetime="<?php echo $row['date']; ?>">
+		<?php echo convert_date($row['date']); ?>
+	</time>
 
-				<?php count_comments( $row['post_id'], true ); ?>
+		<?php count_comments( $row['post_id'], true ); ?>
 
-			</div>
+	</div>
 
-		</article>
-		
-		<?php 
-			} //end while loop		
-		?>
+</article>
 
-		<a href="blog.php" class="button">Continue reading my blog...</a>
+<?php 
+	} //end while loop		
+?>
 
-		<?php		
-		}else{
-			echo 'Sorry, no posts found';
-		} 
-		//we are done with the results, so free the memory/resources on the server
-		$result->free();
-		?>
+<a href="blog.php" class="button">Continue reading my blog...</a>
+
+<?php		
+}else{
+	echo 'Sorry, no posts found';
+} 
+//we are done with the results, so free the memory/resources on the server
+$result->free();
+?>
 
 	</main>
 	<?php include( INCLUDES_PATH . 'sidebar.php' ); ?>
